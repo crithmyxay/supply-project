@@ -29,17 +29,17 @@ export default class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} action="/login" method="get">
           <div className="loginContainer">
-            <InputBox label="Email" type="text" name="email"/>
-            <InputBox label="Password" type="password" name="password"/>
+            <InputBox label="Email" type="text" name="Email"/>
+            <InputBox label="Password" type="password" name="Password"/>
           </div>
           <div className="right">
-            <button type="submit" formMethod="get" formAction={window.location.href + "login"}>Log In</button>
+            <input className="submit" type="submit" formMethod="get" formAction={window.location.href + "login"} value="Log In" />
           </div>
           <div>
             <span>Not a User? </span>
-            <a href="">Register Now!</a>
+            <a href={window.location.href + 'signup'}>Register Now!</a>
           </div>
         </form>
       </div>

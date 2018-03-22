@@ -4,7 +4,7 @@ import React from "react";
 const InputBox = (props) => {
   return (
     <div className="inputBox">
-      <span>{props.label}</span>
+      <label>{props.label}</label>
       <input type={props.type} name={props.name} onChange={this.handleChange}></input>
     </div>
   );
