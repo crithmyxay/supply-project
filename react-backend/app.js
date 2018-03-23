@@ -1,14 +1,15 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 const auth = require('./auth');
 const authenticated = require('./auth').authenticated;
-const User = require('./models/users');
 
-var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+// const User = require('./models/users');
+
+var index = require('./routes/index');
 
 var app = express();
 
@@ -16,29 +17,32 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Authentication Middleware
 
 auth(app);
 
-app.get('/register', (req, res) =>
-  // User.create({
-  //   FirstName: req.FirstName,
-  //   LastName: req.LastName, 
-  //   Phone: req.Number,
-  //   Email: req.Email,
-  //   Password: req.Password
-  // })
-  console.log(req.params.FirstName, req.params.LastName, req.params.Number, req.params.Email, req.params.Password)
-);
+// app.post('/register', (req, res) => {
+//   console.log(req.body);
+//   User.create({
+//       FirstName: req.params.firstname,
+//       LastName: req.params.lastName, 
+//       Phone: req.number,
+//       Email: req.email,
+//       Password: req.password
+//     })
+//     .then((User)=>{
+//       User.save();
+//     })
+// });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use(index);
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
