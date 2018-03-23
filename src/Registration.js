@@ -29,23 +29,19 @@ export default class Registration extends Component {
     event.preventDefault();
   }
 
-  // formMethod="post" formAction={window.location.href + "register"}d
-
   render() {
     return (
       <div className="Login">
-        <form action="http://localhost:3000/register">
-          <div className="loginContainer">
-            <InputBox label="First Name" type="text" name="FirstName"/>
-            <InputBox label="Last Name" type="text" name="LastName"/>
-            <InputBox label="Phone Number" type="text" name="Phone"/>
-            <InputBox label="Email Address" type="text" name="Email"/>
-            <InputBox label="Confirm Email Address" type="text" name="ConfirmEmail"/>
-            <InputBox label="Password" type="password" name="Password"/>
-            <InputBox label="Confirm Password" type="password" name="ConfirmPassword"/>
-          </div>
+        <form className="loginContainer" action="http://localhost:3000/user" method="POST">
+          <InputBox label="First Name" type="text" name="firstname"/>
+          <InputBox label="Last Name" type="text" name="lastname"/>
+          <InputBox label="Phone Number" type="text" name="number"/>
+          <InputBox label="Email Address" type="text" name="email"/>
+          <InputBox label="Confirm Email Address" type="text" name="ConfirmEmail"/>
+          <InputBox label="Password" type="password" name="password"/>
+          <InputBox label="Confirm Password" type="password" name="ConfirmPassword"/>
           <div className="right">
-            <button className="submit" value="Submit" onClick={console.log('clicked')}>Submit</button>
+            <button className="submit" value="Submit">Submit</button>
           </div>
         </form>
       </div>
