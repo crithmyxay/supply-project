@@ -4,6 +4,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
 const User = require('./models/users');
+const bcrypt = require('bcrypt');
 
 const auth = (app) => {
   app.use(cookieParser());
@@ -54,19 +55,9 @@ const auth = (app) => {
   // });
 
   app.get('/login',
-    passport.authenticate('local', { successRedirect: '/user/:userId',
+    passport.authenticate('local', { successRedirect: '/user/:email',
                                     failureRedirect: '/',
                                     failureFlash: true })
-  );
-
-  app.post('/register', (req, res) =>
-    User.create({
-      FirstName: req.FirstName,
-      LastName: req.LastName, 
-      Phone: req.Number,
-      Email: req.Email,
-      Password: req.Password
-    })
   );
 
   app.get('/logout', function(req, res, next) {
