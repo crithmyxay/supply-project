@@ -26,24 +26,16 @@ app.use(cookieParser());
 
 auth(app);
 
-// app.post('/register', (req, res) => {
-//   console.log(req.body);
-//   User.create({
-//       FirstName: req.params.firstname,
-//       LastName: req.params.lastName, 
-//       Phone: req.number,
-//       Email: req.email,
-//       Password: req.password
-//     })
-//     .then((User)=>{
-//       User.save();
-//     })
-// });
+app.use(express.static(path.join(__dirname, 'login')))
+
+app.use((req, res, next)=>{
+  if (req.isAuthenticated()) { next(); }
+  else ( res.redirect('/'))
+})
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(index);
-// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

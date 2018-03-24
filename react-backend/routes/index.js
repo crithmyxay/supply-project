@@ -30,17 +30,17 @@ router.route('/user')
         number: req.body.number,
         email: req.body.email,
         password: hash
-      })
+      }).then((user)=>{
+          res.redirect('http://localhost:3001/')
+        })
       }
     })
   })
+  
+router.route('/login')
+
+  .get((req, res)=> {
     
-  .get((req, res) => {
-    User.findAll()
-      .then(allUsers => {
-        res.json(allUsers);
-        // console.log(allUsers);
-      })
   })
 
 module.exports = router;
