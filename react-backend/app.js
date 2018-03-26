@@ -26,16 +26,25 @@ app.use(cookieParser());
 
 auth(app);
 
-app.use(express.static(path.join(__dirname, 'login')))
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.get('/', (req, res)=>{
+  res.sendFile(path.join(__dirname, 'public/index.html'))
+});
+
+app.use(index);
 
 app.use((req, res, next)=>{
   if (req.isAuthenticated()) { next(); }
   else ( res.redirect('/'))
 })
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'profile')));
 
-app.use(index);
+app.get('/profile', (req, res)=>{
+  res.sendFile(path.join(__dirname, 'profile/index.html'))
+})
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
