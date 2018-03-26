@@ -74,7 +74,7 @@ const authenticated = (req, res, next) => {
   }
 
   console.log("that didn't work at all");
-  res.reredirect('/login');
+  res.reredirect('/');
 };
 
 module.exports = auth;

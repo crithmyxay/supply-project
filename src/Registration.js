@@ -32,7 +32,7 @@ export default class Registration extends Component {
   render() {
     return (
       <div className="Login">
-        <form className="loginContainer" action="http://localhost:3000/user" method="POST">
+        <form className="loginContainer" action="/user" method="POST">
           <InputBox label="First Name" type="text" name="firstname"/>
           <InputBox label="Last Name" type="text" name="lastname"/>
           <InputBox label="Phone Number" type="text" name="number"/>

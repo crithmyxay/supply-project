@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const User = require('../models/users')
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 router.all('*', (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -31,7 +32,7 @@ router.route('/user')
         email: req.body.email,
         password: hash
       }).then((user)=>{
-          res.redirect('http://localhost:3001/')
+          res.redirect('/')
         })
       }
     })
@@ -39,8 +40,29 @@ router.route('/user')
   
 router.route('/login')
 
-  .get((req, res)=> {
-    
+  .post((req, res)=> {
+    User.findOne({
+      where: {
+        email: req.body.email
+      }
+    }).then((user)=> {
+      if (user) {
+        bcrypt.compare(req.body.password, user.password, function(err, res) {
+          if (err) {
+            return err;
+          }
+          else if(res) {
+            console.log('that worked!');
+            return passport.authenticate('local');
+          } else {
+           console.log('that did not work');
+          } 
+        });
+      }
+      if (!user) {
+        console.log('thats not an email');
+      }
+    })
   })
 
 module.exports = router;
